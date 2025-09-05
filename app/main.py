@@ -1,6 +1,11 @@
-from repositories.pdf_repository import PDFRepository
+from repositories.vector_repository import VectorRepository
 
 if __name__ == "__main__":
-    repo = PDFRepository()
-    chunks = repo.load_and_chunk("1. स्कूल मास्टर सॉफ्टवेअर सुरु करणे.pdf")
-    print(f"extracted {len(chunks)} chunks from the pdf file")
+    repo = VectorRepository()
+    index = repo.build_index()
+    print("Index dimension: ", index.d)
+    print("Total vectors:", index.ntotal)
+
+    query = index.reconstruct(0)
+    D, I = index.search(query.reshape(1, -1), k=3)
+    print("Nerest Neighbors (IDs):", I, "with scores", D)
