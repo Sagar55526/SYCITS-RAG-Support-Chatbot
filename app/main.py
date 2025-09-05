@@ -1,19 +1,6 @@
-# from langchain_community.document_loaders import PyPDFLoader
-# from langchain.text_splitter import RecursiveCharacterTextSplitter
+from repositories.pdf_repository import PDFRepository
 
-# # pdfloader = PyPDFLoader("data/1. स्कूल मास्टर सॉफ्टवेअर सुरु करणे.pdf")
-# pdfloader = PyPDFLoader(
-#     r"C:/Users/ahire/Desktop/GenAI Projects/SYCITS RAG Chatbot/data\1. स्कूल मास्टर सॉफ्टवेअर सुरु करणे.pdf"
-# )
-# content = pdfloader.load()
-# print(content)
-# print(len(content))
-
-from fastapi import FastAPI
-
-app = FastAPI()
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+if __name__ == "__main__":
+    repo = PDFRepository()
+    chunks = repo.load_and_chunk("1. स्कूल मास्टर सॉफ्टवेअर सुरु करणे.pdf")
+    print(f"extracted {len(chunks)} chunks from the pdf file")
