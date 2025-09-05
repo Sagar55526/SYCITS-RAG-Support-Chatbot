@@ -1,0 +1,13 @@
+langchain
+langchain-community
+langchain-google-genai
+sentence-transformers
+chromadb
+fastapi
+uvicorn
+pydantic
+google-generativeai
+streamlit
+python-dotenv
+pypdf
+faiss-cpu
