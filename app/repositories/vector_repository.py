@@ -6,11 +6,16 @@ import os
 
 
 class VectorRepository:
-    def __init__(self, index_dir: str = "../data/faiss_index"):
-        self.index_dir = Path(index_dir).resolve()
+    def __init__(self, index_dir: str = None):
+        # Go up from app/repositories → app → project root
+        project_root = Path(__file__).resolve().parents[1].parent
+        if index_dir:
+            self.index_dir = project_root / index_dir
+        else:
+            self.index_dir = project_root / "data/faiss_index"
         self.index_dir.mkdir(parents=True, exist_ok=True)
         self.index_file = self.index_dir / "index.faiss"
-        self.meta_file = self.index_dir / "metadata.json"
+        self.meta_file = self.index_dir / "embeddings.json"
 
     def build_index(self, embeddings_file: str = "embeddings.json"):
         """
